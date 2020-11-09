@@ -3,9 +3,8 @@ process.stdin.on('data', (data) => {
   const n = data.split(' ');
   const a = Number(n[0]),
     b = Number(n[1]);
-  const star = '*';
-  const stars = star.padStart(a, star);
-  for (let i = 0; i < b; i++) {
-    console.log(stars);
-  }
+  const stars = '*'.repeat(a * b);
+  const reg = new RegExp('(.{' + a + '})', 'g');
+  const result = stars.replace(reg, '$1\n');
+  console.log(result);
 });
