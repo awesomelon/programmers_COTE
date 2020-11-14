@@ -5,14 +5,32 @@ function solution(_dartResult) {
   let cursor = 0;
   let tempStr = '';
 
+  const multiplication = (item, index, origin) => {
+    if (index === origin.length - 1 || index === origin.length - 2) {
+      return (item *= 2);
+    }
+    return item;
+  };
+
+  const negative = (item, index, origin) => {
+    if (index === origin.length - 1) {
+      return -item;
+    }
+    return item;
+  };
+
+  const add = (prev, acc) => (prev += acc);
+
   while (cursor < dartResult.length) {
-    if (isNaN(parseInt(dartResult[cursor]))) {
-      tempStr += dartResult[cursor];
+    const currentValue = dartResult[cursor];
+
+    if (isNaN(parseInt(currentValue))) {
+      tempStr += currentValue;
       parseDartResult.push(tempStr);
       cursor = 0;
       tempStr = '';
     } else {
-      tempStr += dartResult[cursor];
+      tempStr += currentValue;
     }
     dartResult.shift();
   }
@@ -31,26 +49,13 @@ function solution(_dartResult) {
     }
 
     if (item === '*') {
-      temp = temp.map((item, i) => {
-        if (i === temp.length - 1 || i === temp.length - 2) {
-          return (item *= 2);
-        } else {
-          return item;
-        }
-      });
+      temp = temp.map(multiplication);
     }
 
     if (item === '#') {
-      temp = temp.map((t, i) => {
-        if (i === temp.length - 1) {
-          return -t;
-        } else {
-          return t;
-        }
-      });
+      temp = temp.map(negative);
     }
   });
 
-  const answer = temp.reduce((prev, acc) => (prev += acc), 0);
-  return answer;
+  return temp.reduce(add, 0);
 }
