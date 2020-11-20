@@ -40,3 +40,30 @@
 9 = 2 + 7 입니다.
 12 = 5 + 7 입니다.
 따라서 [2,5,7,9,12] 를 return 해야 합니다.
+
+---
+
+### 풀이
+
+```javascript
+function solution(numbers) {
+  var result = [];
+
+  while (numbers.length) {
+    const first = numbers.shift();
+
+    for (let i = 0; i < numbers.length; i++) {
+      let sum = first + numbers[i];
+      result.push(sum);
+    }
+  }
+
+  return Array.from(new Set(result.sort((a, b) => a - b)));
+}
+```
+
+- 입력받은 숫자 배열을 반복문을 돌면서 계산을 시도한다.
+
+  - 단, 계산을 시도한 숫자는 배열에서 제외한다.
+
+- 입력 받은 숫자 배열이 다 비워질 때까지 반복한다.

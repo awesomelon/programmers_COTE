@@ -32,3 +32,36 @@ sun, bed, car의 1번째 인덱스 값은 각각 u, e, a 입니다. 이를 기�
 #### 입출력 예 #2
 
 abce와 abcd, cdx의 2번째 인덱스 값은 c, c, x입니다. 따라서 정렬 후에는 cdx가 가장 뒤에 위치합니다. abce와 abcd는 사전순으로 정렬하면 abcd가 우선하므로, 답은 [abcd, abce, cdx] 입니다.
+
+---
+
+### 풀이
+
+```javascript
+function solution(strings, n) {
+  return strings.sort((a, b) => {
+    const _a = a[n];
+    const _b = b[n];
+
+    if (_a > _b) {
+      return 1;
+    }
+
+    if (_a < _b) {
+      return -1;
+    }
+
+    if (a > b) {
+      return 1;
+    }
+
+    if (a < b) {
+      return -1;
+    }
+
+    return 0;
+  });
+}
+```
+
+- 입력받은 문자열 배열을 sort 메서드로 정렬한다.

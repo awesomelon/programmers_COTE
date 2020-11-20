@@ -40,3 +40,75 @@
 ### 입출력 예제
 
 ![](./screen.png)
+
+---
+
+### 풀이
+
+```javascript
+function solution(_dartResult) {
+  let dartResult = [..._dartResult];
+  let parseDartResult = [];
+  let temp = [];
+  let cursor = 0;
+  let tempStr = '';
+
+  const multiplication = (item, index, origin) => {
+    if (index === origin.length - 1 || index === origin.length - 2) {
+      return (item *= 2);
+    }
+    return item;
+  };
+
+  const negative = (item, index, origin) => {
+    if (index === origin.length - 1) {
+      return -item;
+    }
+    return item;
+  };
+
+  const add = (prev, acc) => (prev += acc);
+
+  while (cursor < dartResult.length) {
+    const currentValue = dartResult[cursor];
+
+    if (isNaN(parseInt(currentValue))) {
+      tempStr += currentValue;
+      parseDartResult.push(tempStr);
+      cursor = 0;
+      tempStr = '';
+    } else {
+      tempStr += currentValue;
+    }
+    dartResult.shift();
+  }
+
+  parseDartResult.forEach((item) => {
+    if (item.indexOf('S') > -1) {
+      temp.push((+item.split('S')[0]) ** 1);
+    }
+
+    if (item.indexOf('D') > -1) {
+      temp.push((+item.split('D')[0]) ** 2);
+    }
+
+    if (item.indexOf('T') > -1) {
+      temp.push((+item.split('T')[0]) ** 3);
+    }
+
+    if (item === '*') {
+      temp = temp.map(multiplication);
+    }
+
+    if (item === '#') {
+      temp = temp.map(negative);
+    }
+  });
+
+  return temp.reduce(add, 0);
+}
+```
+
+- 입력 받은 dartResult 문자열을 각각 문자로 만든 다음 배열로 만든다.
+- 그렇게 만들어진 문자 배열을 각 기회에 맞는 문자로 합친 다음 배열로 만든다.
+- 이렇게 합쳐진 배열을 반복문을 돌면서 점수에 맞는 식으로 계산한다.
