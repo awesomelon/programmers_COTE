@@ -17,3 +17,18 @@ divisor로 나누어 떨어지는 element가 하나도 없다면 배열에 -1을
 | [5,9,7,10] | 5       | [5,10]     |
 | [2,36,1,3] | 1       | [1,2,3,36] |
 | [3,2,6]    | 10      | [-1]       |
+
+---
+
+### 풀이
+
+```javascript
+function solution(arr, divisor) {
+  let answer = arr.filter((v) => v % divisor === 0).sort((a, b) => a - b);
+  return answer.length ? answer : [-1];
+}
+```
+
+- 인자로 받은 배열 중 divisor로 나누어 떨어지는 것들만 filter로 배열로 다시 만든다.
+- filter로 만들어진 배열을 오름 차순한다.
+- 대신 나누어 떨어지는 배열이 없을 시 [-1]로 리턴한다.
