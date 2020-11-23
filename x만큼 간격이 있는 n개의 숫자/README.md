@@ -14,3 +14,17 @@
 | 2   | 5   | [2,4,6,8,10] |
 | 4   | 3   | [4,8,12]     |
 | -4  | 2   | [-4, -8]     |
+
+---
+
+### 풀이
+
+```javascript
+function solution(x, n) {
+  var answer = Array(n).fill(x);
+  return answer.map((v, i) => v * (i + 1));
+}
+```
+
+- x로 채워진 n의 크기의 배열을 생성한다.
+- 생성된 배열을 map을 돌며 크기를 증가 시킨다.
