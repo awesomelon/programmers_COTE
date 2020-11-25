@@ -13,3 +13,14 @@
 | ------------ | -------------- |
 | 01033334444  | **\*\*\***4444 |
 | 027778888    | **\***8888     |
+
+---
+
+### 풀이
+
+```javascript
+function solution(phone_number) {
+  const result = phone_number.replace(/\d(?=\d{4})/g, '*');
+  return result;
+}
+```
